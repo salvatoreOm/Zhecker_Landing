@@ -31,7 +31,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
-import { useCursor } from "@/hooks/use-cursor";
 import { apiRequest } from "@/lib/queryClient";
 import { insertSubscriptionSchema, type InsertSubscription } from "@shared/schema";
 import ZheckerLogo from "@assets/image_1754239227889.png";
@@ -62,9 +61,6 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
   const { toast } = useToast();
-  
-  // Initialize custom cursor
-  useCursor();
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
