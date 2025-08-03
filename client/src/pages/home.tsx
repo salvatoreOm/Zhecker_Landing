@@ -32,6 +32,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/use-scroll-animation";
+import { useBrickAnimation } from "@/hooks/use-brick-animation";
 import { apiRequest } from "@/lib/queryClient";
 import { insertSubscriptionSchema, type InsertSubscription } from "@shared/schema";
 import ZheckerLogo from "@assets/image_1754239227889.png";
@@ -69,6 +70,7 @@ export default function Home() {
   const benefitsAnimation = useScrollAnimation(0.1);
   const subscribeAnimation = useScrollAnimation(0.1);
   const { ref: featureCardsRef, visibleItems: featureCardsVisible } = useStaggeredAnimation(6, 0.1);
+  const { ref: brickAnimationRef, animationState } = useBrickAnimation(7, 0.2);
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
@@ -307,53 +309,31 @@ export default function Home() {
       {/* Animated Brand Text */}
       <div className="pt-16 pb-8 text-center relative overflow-hidden">
         <div className="absolute inset-0 gradient-bg dark:dark-gradient-bg opacity-5"></div>
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+        <div
+          ref={brickAnimationRef}
           className="relative z-10"
         >
-          <motion.h1 
-            className="text-6xl md:text-8xl font-bold text-primary neon-text tracking-wider"
-            animate={{ 
-              textShadow: [
-                "0 0 10px hsl(var(--neon-blue) / 0.8)",
-                "0 0 20px hsl(var(--neon-blue) / 1), 0 0 30px hsl(var(--neon-cyan) / 0.8)",
-                "0 0 10px hsl(var(--neon-blue) / 0.8)"
-              ]
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
+          <h1 className="text-6xl md:text-8xl font-bold text-primary neon-text tracking-wider">
             {"Zhecker".split("").map((letter, index) => (
-              <motion.span
+              <span
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.1,
-                  ease: "easeOut"
-                }}
-                className="inline-block"
-                whileHover={{ 
-                  scale: 1.2, 
-                  color: "hsl(var(--neon-cyan))",
-                  textShadow: "0 0 25px hsl(var(--neon-cyan) / 1)"
+                className={`brick-letter ${
+                  animationState === 'breaking' ? 'break' : 
+                  animationState === 'forming' ? 'form' : ''
+                }`}
+                style={{ 
+                  transitionDelay: `${index * 0.1}s`,
+                  animationDelay: `${index * 0.1}s`
                 }}
               >
                 {letter}
-              </motion.span>
+              </span>
             ))}
-          </motion.h1>
-          <motion.p 
-            className="text-lg text-muted-foreground mt-4 font-medium tracking-wide"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-          >
+          </h1>
+          <p className="text-lg text-muted-foreground mt-4 font-medium tracking-wide">
             AI-Powered Subjective Answer Evaluation
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
       </div>
 
       {/* Hero Section */}
