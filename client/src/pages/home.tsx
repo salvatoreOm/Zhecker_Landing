@@ -324,7 +324,16 @@ export default function Home() {
                 style={{ 
                   transitionDelay: `${index * 0.1}s`,
                   animationDelay: `${index * 0.1}s`,
-                  '--bounce-x': `${scatterPositions[index]?.x || 0}px`
+                  '--bounce-x-1': `${(scatterPositions[index]?.x || 0) * 0.2}px`,
+                  '--bounce-y-1': `${(scatterPositions[index]?.y || 0) * 0.2}px`,
+                  '--bounce-x-2': `${(scatterPositions[index]?.x || 0) * 0.4}px`,
+                  '--bounce-y-2': `${(scatterPositions[index]?.y || 0) * 0.4}px`,
+                  '--bounce-x-3': `${(scatterPositions[index]?.x || 0) * 0.6}px`,
+                  '--bounce-y-3': `${(scatterPositions[index]?.y || 0) * 0.6}px`,
+                  '--bounce-x-4': `${(scatterPositions[index]?.x || 0) * 0.8}px`,
+                  '--bounce-y-4': `${(scatterPositions[index]?.y || 0) * 0.8}px`,
+                  '--bounce-x-final': `${scatterPositions[index]?.x || 0}px`,
+                  '--bounce-y-final': `${scatterPositions[index]?.y || 0}px`
                 } as React.CSSProperties}
               >
                 {letter}

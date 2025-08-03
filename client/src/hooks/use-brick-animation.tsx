@@ -6,11 +6,16 @@ export const useBrickAnimation = (letterCount: number, threshold = 0.1) => {
   const [scatterPositions, setScatterPositions] = useState<Array<{x: number, y: number}>>([]);
 
   useEffect(() => {
-    // Generate random bounce positions for each letter (smaller range for smoother effect)
-    const positions = Array.from({ length: letterCount }, () => ({
-      x: (Math.random() - 0.5) * 120, // Random X between -60 and 60
-      y: 0,  // Y is handled by animation keyframes
-    }));
+    // Generate random bounce positions for each letter across full screen
+    const positions = Array.from({ length: letterCount }, () => {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      
+      return {
+        x: (Math.random() - 0.5) * screenWidth * 0.8, // Use 80% of screen width
+        y: (Math.random() - 0.5) * screenHeight * 0.6, // Use 60% of screen height
+      };
+    });
     setScatterPositions(positions);
   }, [letterCount]);
 
@@ -30,21 +35,21 @@ export const useBrickAnimation = (letterCount: number, threshold = 0.1) => {
       const rect = element.getBoundingClientRect();
       const isInView = rect.top < window.innerHeight && rect.bottom > 0;
       
-      if (isInView && animationState === 'idle') {
-        if (isScrollingDown) {
+      if (isInView) {
+        if (isScrollingDown && animationState !== 'breaking') {
           // Start breaking animation when scrolling down
           setAnimationState('breaking');
           
           animationTimeout = setTimeout(() => {
             setAnimationState('idle');
-          }, 600);
-        } else {
+          }, 1000);
+        } else if (!isScrollingDown && animationState !== 'forming') {
           // Start forming animation when scrolling up
           setAnimationState('forming');
           
           animationTimeout = setTimeout(() => {
             setAnimationState('idle');
-          }, 600);
+          }, 1000);
         }
       }
     };
