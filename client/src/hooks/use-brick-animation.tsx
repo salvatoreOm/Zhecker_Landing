@@ -21,7 +21,6 @@ export const useBrickAnimation = (letterCount: number, threshold = 0.1) => {
 
   useEffect(() => {
     let animationTimeout: NodeJS.Timeout;
-    let resetTimeout: NodeJS.Timeout;
     let lastScrollY = window.scrollY;
     
     const handleScroll = () => {
@@ -42,14 +41,14 @@ export const useBrickAnimation = (letterCount: number, threshold = 0.1) => {
           
           animationTimeout = setTimeout(() => {
             setAnimationState('idle');
-          }, 1000);
+          }, 1500);
         } else if (!isScrollingDown && animationState !== 'forming') {
           // Start forming animation when scrolling up
           setAnimationState('forming');
           
           animationTimeout = setTimeout(() => {
             setAnimationState('idle');
-          }, 1000);
+          }, 1500);
         }
       }
     };
@@ -60,9 +59,6 @@ export const useBrickAnimation = (letterCount: number, threshold = 0.1) => {
       window.removeEventListener('scroll', handleScroll);
       if (animationTimeout) {
         clearTimeout(animationTimeout);
-      }
-      if (resetTimeout) {
-        clearTimeout(resetTimeout);
       }
     };
   }, [threshold, animationState]);

@@ -180,64 +180,86 @@
   }
 
   .brick-letter.break {
-    animation: bounceDisappear 1s ease-out forwards;
+    animation: bounceDisappear 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   .brick-letter.form {
-    animation: bounceReconnect 1s ease-out forwards;
+    animation: bounceReconnect 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   }
 
   @keyframes bounceDisappear {
     0% {
-      transform: translateY(0) translateX(0) scale(1);
+      transform: translateY(0) translateX(0) scale(1) rotate(0deg);
       opacity: 1;
+      filter: blur(0px);
     }
-    20% {
-      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.1);
-      opacity: 0.9;
+    15% {
+      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.2) rotate(45deg);
+      opacity: 0.95;
+      filter: blur(0px);
     }
-    40% {
-      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(0.9);
+    30% {
+      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(1.0) rotate(90deg);
+      opacity: 0.85;
+      filter: blur(1px);
+    }
+    50% {
+      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(0.8) rotate(180deg);
       opacity: 0.7;
+      filter: blur(2px);
     }
-    60% {
-      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(0.8);
+    70% {
+      transform: translateY(var(--bounce-y-4)) translateX(var(--bounce-x-4)) scale(0.6) rotate(270deg);
       opacity: 0.5;
+      filter: blur(3px);
     }
-    80% {
-      transform: translateY(var(--bounce-y-4)) translateX(var(--bounce-x-4)) scale(0.6);
+    85% {
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.4) rotate(315deg);
       opacity: 0.3;
+      filter: blur(4px);
     }
     100% {
-      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.3);
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.2) rotate(360deg);
       opacity: 0;
+      filter: blur(5px);
     }
   }
 
   @keyframes bounceReconnect {
     0% {
-      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.3);
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.2) rotate(360deg);
       opacity: 0;
+      filter: blur(5px);
     }
-    20% {
-      transform: translateY(var(--bounce-y-4)) translateX(var(--bounce-x-4)) scale(0.6);
+    15% {
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.4) rotate(315deg);
       opacity: 0.3;
+      filter: blur(4px);
     }
-    40% {
-      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(0.8);
+    30% {
+      transform: translateY(var(--bounce-y-4)) translateX(var(--bounce-x-4)) scale(0.6) rotate(270deg);
       opacity: 0.5;
+      filter: blur(3px);
     }
-    60% {
-      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(0.9);
+    50% {
+      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(0.8) rotate(180deg);
       opacity: 0.7;
+      filter: blur(2px);
     }
-    80% {
-      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.1);
-      opacity: 0.9;
+    70% {
+      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(1.0) rotate(90deg);
+      opacity: 0.85;
+      filter: blur(1px);
+    }
+    85% {
+      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.2) rotate(45deg);
+      opacity: 0.95;
+      filter: blur(0px);
     }
     100% {
-      transform: translateY(0) translateX(0) scale(1);
+      transform: translateY(0) translateX(0) scale(1) rotate(0deg);
       opacity: 1;
+      filter: blur(0px);
     }
   }
 
