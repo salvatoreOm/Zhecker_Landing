@@ -119,18 +119,17 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <motion.div
-                className="flex items-center space-x-3"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="relative"
               >
                 <img 
                   src={ZheckerLogo} 
-                  alt="Zhecker Logo" 
-                  className="w-10 h-10 rounded-lg"
+                  alt="Zhecker" 
+                  className="w-12 h-12 rounded-xl neon-glow hover:neon-glow-lg transition-all duration-300"
                 />
-                <h1 className="text-2xl font-bold text-primary neon-text">
-                  Zhecker
-                </h1>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
             </div>
             
@@ -706,15 +705,17 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-2xl font-bold text-primary neon-text mb-4">Zhecker</h3>
+              <div className="flex items-center space-x-3 mb-4">
+                <img 
+                  src={ZheckerLogo} 
+                  alt="Zhecker" 
+                  className="w-10 h-10 rounded-lg neon-glow"
+                />
+                <h3 className="text-2xl font-bold text-primary neon-text">Zhecker</h3>
+              </div>
               <p className="text-muted-foreground mb-4">
                 Revolutionizing educational assessment with AI-powered subjective answer evaluation.
               </p>
-              <div className="flex space-x-4">
-                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center neon-glow">
-                  <span className="text-primary-foreground font-bold">Z</span>
-                </div>
-              </div>
             </div>
             
             <div>
