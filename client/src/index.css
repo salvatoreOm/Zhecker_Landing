@@ -140,6 +140,52 @@
     transform: translateY(0);
   }
 
+  /* Logo Trimming */
+  .trimmed-logo {
+    object-fit: cover;
+    object-position: center;
+    clip-path: inset(8% 8% 8% 8%);
+  }
+
+  /* Scroll Animations */
+  .slide-in-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .slide-in-left.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .slide-in-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .slide-in-right.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .text-break-form {
+    opacity: 0;
+    transform: scaleY(0) rotateX(90deg);
+    transform-origin: center;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .text-break-form.animate {
+    opacity: 1;
+    transform: scaleY(1) rotateX(0deg);
+  }
+
+  .stagger-animation {
+    transition-delay: calc(var(--index, 0) * 0.1s);
+  }
+
 
 
   /* Hover Effects */

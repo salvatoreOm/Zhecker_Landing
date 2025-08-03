@@ -31,6 +31,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/use-scroll-animation";
 import { apiRequest } from "@/lib/queryClient";
 import { insertSubscriptionSchema, type InsertSubscription } from "@shared/schema";
 import ZheckerLogo from "@assets/image_1754239227889.png";
@@ -61,6 +62,13 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
   const { toast } = useToast();
+  
+  // Scroll animations
+  const heroAnimation = useScrollAnimation(0.1);
+  const featuresAnimation = useScrollAnimation(0.1);
+  const benefitsAnimation = useScrollAnimation(0.1);
+  const subscribeAnimation = useScrollAnimation(0.1);
+  const { ref: featureCardsRef, visibleItems: featureCardsVisible } = useStaggeredAnimation(6, 0.1);
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
@@ -113,7 +121,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
+            <div className="flex items-center space-x-3">
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
@@ -123,10 +131,13 @@ export default function Home() {
                 <img 
                   src={ZheckerLogo} 
                   alt="Zhecker" 
-                  className="w-12 h-12 rounded-xl neon-glow hover:neon-glow-lg transition-all duration-300 object-contain"
+                  className="w-8 h-8 rounded-lg neon-glow hover:neon-glow-lg transition-all duration-300 trimmed-logo"
                 />
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
+              <span className="text-xl font-bold text-primary dark:text-neon-blue">
+                Zhecker
+              </span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -350,11 +361,9 @@ export default function Home() {
         <div className="absolute inset-0 gradient-bg dark:dark-gradient-bg opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div 
-              className="space-y-8"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+            <div 
+              ref={heroAnimation.ref}
+              className={`space-y-8 slide-in-left ${heroAnimation.isVisible ? 'animate' : ''}`}
             >
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
                 AI-Powered{" "}
@@ -381,7 +390,7 @@ export default function Home() {
                   Watch Demo
                 </Button>
               </div>
-            </motion.div>
+            </div>
             
             <motion.div 
               className="relative"
@@ -425,16 +434,22 @@ export default function Home() {
       {/* Features Section */}
       <section id="features" className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-16">
+          <div
+            ref={featuresAnimation.ref}
+            className={`text-center mb-16 slide-in-right ${featuresAnimation.isVisible ? 'animate' : ''}`}
+          >
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Powerful <span className="text-primary neon-text">Features</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Discover how Zhecker transforms traditional grading into an intelligent, efficient process
             </p>
-          </AnimatedSection>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div 
+            ref={featureCardsRef}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {[
               {
                 icon: CheckCircle2,
@@ -467,7 +482,11 @@ export default function Home() {
                 description: "Create and customize evaluation rubrics that align with your institution's grading standards and criteria."
               }
             ].map((feature, index) => (
-              <AnimatedSection key={index}>
+              <div 
+                key={index}
+                className={`slide-in-left stagger-animation ${featureCardsVisible[index] ? 'animate' : ''}`}
+                style={{ '--index': index } as React.CSSProperties}
+              >
                 <motion.div
                   whileHover={{ y: -8 }}
                   transition={{ duration: 0.3 }}
@@ -484,7 +503,7 @@ export default function Home() {
                     </CardContent>
                   </Card>
                 </motion.div>
-              </AnimatedSection>
+              </div>
             ))}
           </div>
         </div>
@@ -757,7 +776,7 @@ export default function Home() {
                 <img 
                   src={ZheckerLogo} 
                   alt="Zhecker" 
-                  className="w-10 h-10 rounded-lg neon-glow object-contain"
+                  className="w-8 h-8 rounded-lg neon-glow trimmed-logo"
                 />
                 <h3 className="text-2xl font-bold text-primary neon-text">Zhecker</h3>
               </div>
