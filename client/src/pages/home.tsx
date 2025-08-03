@@ -324,8 +324,7 @@ export default function Home() {
                 style={{ 
                   transitionDelay: `${index * 0.1}s`,
                   animationDelay: `${index * 0.1}s`,
-                  '--scatter-x': `${scatterPositions[index]?.x || 0}px`,
-                  '--scatter-y': `${scatterPositions[index]?.y || -200}px`
+                  '--bounce-x': `${scatterPositions[index]?.x || 0}px`
                 } as React.CSSProperties}
               >
                 {letter}
