@@ -17,7 +17,10 @@ import {
   Clock, 
   Target,
   Menu,
-  X
+  X,
+  DollarSign,
+  ArrowRight,
+  MessageCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,8 +31,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
+import { useCursor } from "@/hooks/use-cursor";
 import { apiRequest } from "@/lib/queryClient";
 import { insertSubscriptionSchema, type InsertSubscription } from "@shared/schema";
+import ZheckerLogo from "@assets/ZheckerLogo_1754238363728.jpg";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -55,7 +60,11 @@ function AnimatedSection({ children, className = "" }: AnimatedSectionProps) {
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showPricing, setShowPricing] = useState(false);
   const { toast } = useToast();
+  
+  // Initialize custom cursor
+  useCursor();
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
@@ -109,37 +118,50 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <motion.h1 
-                className="text-2xl font-bold text-primary neon-text"
+              <motion.div
+                className="flex items-center space-x-3"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                Zhecker
-              </motion.h1>
+                <img 
+                  src={ZheckerLogo} 
+                  alt="Zhecker Logo" 
+                  className="w-10 h-10 rounded-lg"
+                />
+                <h1 className="text-2xl font-bold text-primary neon-text">
+                  Zhecker
+                </h1>
+              </motion.div>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
               <button 
                 onClick={() => scrollToSection("home")}
-                className="hover:text-primary transition-colors duration-200"
+                className="hover:text-primary transition-colors duration-200 hover-lift"
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection("features")}
-                className="hover:text-primary transition-colors duration-200"
+                className="hover:text-primary transition-colors duration-200 hover-lift"
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection("benefits")}
-                className="hover:text-primary transition-colors duration-200"
+                className="hover:text-primary transition-colors duration-200 hover-lift"
               >
                 Benefits
               </button>
               <button 
+                onClick={() => setShowPricing(true)}
+                className="hover:text-primary transition-colors duration-200 hover-lift"
+              >
+                Pricing
+              </button>
+              <button 
                 onClick={() => scrollToSection("subscribe")}
-                className="hover:text-primary transition-colors duration-200"
+                className="hover:text-primary transition-colors duration-200 hover-lift"
               >
                 Subscribe
               </button>
@@ -187,6 +209,12 @@ export default function Home() {
                   Benefits
                 </button>
                 <button 
+                  onClick={() => setShowPricing(true)}
+                  className="block px-3 py-2 text-base font-medium hover:text-primary transition-colors duration-200 w-full text-left"
+                >
+                  Pricing
+                </button>
+                <button 
                   onClick={() => scrollToSection("subscribe")}
                   className="block px-3 py-2 text-base font-medium hover:text-primary transition-colors duration-200 w-full text-left"
                 >
@@ -197,6 +225,78 @@ export default function Home() {
           )}
         </div>
       </nav>
+
+      {/* Floating Pricing Modal */}
+      {showPricing && (
+        <motion.div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setShowPricing(false)}
+        >
+          <motion.div
+            className="pricing-card rounded-3xl p-8 max-w-md w-full pricing-float"
+            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 50 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-center space-y-6">
+              <div className="w-16 h-16 bg-gradient-to-r from-primary to-cyan-500 rounded-2xl flex items-center justify-center mx-auto neon-glow">
+                <DollarSign className="w-8 h-8 text-white" />
+              </div>
+              
+              <div>
+                <h3 className="text-2xl font-bold mb-2">Pay-As-You-Go Pricing</h3>
+                <p className="text-muted-foreground">
+                  Flexible pricing that scales with your institution's needs
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-background/50 rounded-2xl">
+                  <span className="text-sm">Per Answer Sheet</span>
+                  <span className="font-bold text-primary">₹2.50</span>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-background/50 rounded-2xl">
+                  <span className="text-sm">Bulk Evaluation (500+)</span>
+                  <span className="font-bold text-primary">₹1.80</span>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-background/50 rounded-2xl">
+                  <span className="text-sm">Enterprise (5000+)</span>
+                  <span className="font-bold text-primary">₹1.20</span>
+                </div>
+              </div>
+
+              <div className="space-y-3 pt-4">
+                <Button 
+                  onClick={() => {
+                    setShowPricing(false);
+                    scrollToSection("subscribe");
+                  }}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold neon-glow hover:neon-glow-lg transition-all duration-300"
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  Contact Us for Pricing
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={() => setShowPricing(false)}
+                  className="w-full border-primary/30 text-primary hover:bg-primary/10 transition-all duration-300"
+                >
+                  Close
+                </Button>
+              </div>
+
+              <div className="text-xs text-muted-foreground pt-2">
+                * Custom pricing available for educational institutions with special requirements
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
 
       {/* Hero Section */}
       <section id="home" className="pt-16 min-h-screen flex items-center relative overflow-hidden">
@@ -221,7 +321,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold neon-glow hover:neon-glow-lg transition-all duration-300 transform hover:scale-105"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold neon-glow hover:neon-glow-lg transition-all duration-300 transform hover:scale-105 hover-lift"
                   onClick={() => scrollToSection("subscribe")}
                 >
                   Get Started Free
@@ -229,7 +329,7 @@ export default function Home() {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold neon-border transition-all duration-300"
+                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold neon-border transition-all duration-300 hover-lift"
                 >
                   Watch Demo
                 </Button>
@@ -325,7 +425,7 @@ export default function Home() {
                   whileHover={{ y: -8 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Card className="bg-card hover:shadow-2xl transition-all duration-300 neon-border h-full">
+                  <Card className="bg-card hover:shadow-2xl transition-all duration-300 neon-border h-full hover-lift">
                     <CardHeader>
                       <div className="w-16 h-16 bg-gradient-to-r from-primary to-cyan-500 rounded-2xl flex items-center justify-center mb-6 neon-glow">
                         <feature.icon className="w-8 h-8 text-white" />
@@ -436,7 +536,7 @@ export default function Home() {
         <div className="absolute inset-0 gradient-bg dark:dark-gradient-bg opacity-10"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <Card className="shadow-2xl neon-border backdrop-blur-sm bg-card/95">
+            <Card className="shadow-2xl neon-border backdrop-blur-sm bg-card/95 hover-lift">
               <CardHeader className="text-center pb-10">
                 <CardTitle className="text-4xl lg:text-5xl font-bold mb-6">
                   Subscribe Your{" "}
@@ -588,7 +688,7 @@ export default function Home() {
                     <Button 
                       type="submit" 
                       size="lg"
-                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold neon-glow hover:neon-glow-lg transition-all duration-300 transform hover:scale-[1.02]"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold neon-glow hover:neon-glow-lg transition-all duration-300 transform hover:scale-[1.02] hover-lift"
                       disabled={subscriptionMutation.isPending}
                     >
                       {subscriptionMutation.isPending ? "Subscribing..." : "Subscribe to Zhecker"}
@@ -620,20 +720,20 @@ export default function Home() {
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><button className="hover:text-primary transition-colors">Features</button></li>
-                <li><button className="hover:text-primary transition-colors">Pricing</button></li>
-                <li><button className="hover:text-primary transition-colors">Demo</button></li>
-                <li><button className="hover:text-primary transition-colors">API</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift">Features</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift" onClick={() => setShowPricing(true)}>Pricing</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift">Demo</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift">API</button></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><button className="hover:text-primary transition-colors">Help Center</button></li>
-                <li><button className="hover:text-primary transition-colors">Documentation</button></li>
-                <li><button className="hover:text-primary transition-colors">Contact</button></li>
-                <li><button className="hover:text-primary transition-colors">Training</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift">Help Center</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift">Documentation</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift" onClick={() => scrollToSection("subscribe")}>Contact</button></li>
+                <li><button className="hover:text-primary transition-colors hover-lift">Training</button></li>
               </ul>
             </div>
             

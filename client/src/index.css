@@ -139,4 +139,86 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Custom Cursor Styles */
+  .custom-cursor {
+    cursor: none;
+  }
+
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--neon-cyan)));
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+
+  .cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 2px solid hsl(var(--primary) / 0.6);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease-out;
+  }
+
+  .dark .cursor-dot {
+    background: linear-gradient(45deg, hsl(var(--neon-blue)), hsl(var(--neon-cyan)));
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--neon-cyan) / 0.4);
+  }
+
+  .dark .cursor-outline {
+    border-color: hsl(var(--primary) / 0.8);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  .cursor-hover .cursor-dot {
+    transform: scale(1.5);
+  }
+
+  .cursor-hover .cursor-outline {
+    transform: scale(1.5);
+    border-color: hsl(var(--primary));
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
+  }
+
+  .dark .hover-lift:hover {
+    box-shadow: 0 10px 25px hsl(var(--primary) / 0.4), 0 0 30px hsl(var(--neon-blue) / 0.2);
+  }
+
+  /* Pricing Card Styles */
+  .pricing-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .pricing-card {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .pricing-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.1), inset 0 0 40px rgba(255, 255, 255, 0.05);
+  }
 }
