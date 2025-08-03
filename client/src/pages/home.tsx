@@ -70,7 +70,7 @@ export default function Home() {
   const benefitsAnimation = useScrollAnimation(0.1);
   const subscribeAnimation = useScrollAnimation(0.1);
   const { ref: featureCardsRef, visibleItems: featureCardsVisible } = useStaggeredAnimation(6, 0.1);
-  const { ref: brickAnimationRef, animationState } = useBrickAnimation(7, 0.2);
+  const { ref: brickAnimationRef, animationState, scatterPositions } = useBrickAnimation(7, 0.2);
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
@@ -133,7 +133,7 @@ export default function Home() {
                 <img 
                   src={ZheckerLogo} 
                   alt="Zhecker" 
-                  className="w-8 h-8 rounded-lg neon-glow hover:neon-glow-lg transition-all duration-300 trimmed-logo"
+                  className="w-8 h-8 trimmed-logo logo-glow"
                 />
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
@@ -323,8 +323,10 @@ export default function Home() {
                 }`}
                 style={{ 
                   transitionDelay: `${index * 0.1}s`,
-                  animationDelay: `${index * 0.1}s`
-                }}
+                  animationDelay: `${index * 0.1}s`,
+                  '--scatter-x': `${scatterPositions[index]?.x || 0}px`,
+                  '--scatter-y': `${scatterPositions[index]?.y || -200}px`
+                } as React.CSSProperties}
               >
                 {letter}
               </span>
@@ -473,7 +475,7 @@ export default function Home() {
                 >
                   <Card className="bg-card hover:shadow-2xl transition-all duration-300 neon-border h-full hover-lift">
                     <CardHeader>
-                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-cyan-500 rounded-2xl flex items-center justify-center mb-6 neon-glow">
+                      <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 feature-icon-glow">
                         <feature.icon className="w-8 h-8 text-white" />
                       </div>
                       <CardTitle className="text-2xl font-bold">{feature.title}</CardTitle>
@@ -756,7 +758,7 @@ export default function Home() {
                 <img 
                   src={ZheckerLogo} 
                   alt="Zhecker" 
-                  className="w-8 h-8 rounded-lg neon-glow trimmed-logo"
+                  className="w-8 h-8 trimmed-logo logo-glow"
                 />
                 <h3 className="text-2xl font-bold text-primary neon-text">Zhecker</h3>
               </div>
