@@ -1,6 +1,6 @@
 # Overview
 
-This is a modern full-stack web application built with React and Express.js that appears to be a subscription-based platform. The application features a landing page with animated sections and a subscription form for educational institutions to sign up for services. It uses TypeScript throughout the stack, implements a clean UI with shadcn/ui components, and includes form validation with proper error handling.
+This is a modern full-stack web application built with React and Express.js - a beautiful landing page for Zhecker, an AI-powered subjective answer evaluation software for educational institutions. The application features dual theme support (clean light theme and blue/black neon dark theme), advanced scroll animations with letter particle effects, and a subscription form for institutions. It uses TypeScript throughout the stack, implements a clean UI with shadcn/ui components, includes comprehensive README documentation, and features dramatic letter bounce animations that respond to scroll direction.
 
 # User Preferences
 
