@@ -15,8 +15,8 @@ export function useCursor() {
     const moveCursor = (e: MouseEvent) => {
       cursor.style.left = e.clientX - 6 + 'px';
       cursor.style.top = e.clientY - 6 + 'px';
-      cursorOutline.style.left = e.clientX - 20 + 'px';
-      cursorOutline.style.top = e.clientY - 20 + 'px';
+      cursorOutline.style.left = e.clientX - 16 + 'px';
+      cursorOutline.style.top = e.clientY - 16 + 'px';
     };
 
     const addHoverEffect = () => {

@@ -34,7 +34,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useCursor } from "@/hooks/use-cursor";
 import { apiRequest } from "@/lib/queryClient";
 import { insertSubscriptionSchema, type InsertSubscription } from "@shared/schema";
-import ZheckerLogo from "@assets/ZheckerLogo_1754238363728.jpg";
+import ZheckerLogo from "@assets/image_1754239227889.png";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -127,7 +127,7 @@ export default function Home() {
                 <img 
                   src={ZheckerLogo} 
                   alt="Zhecker" 
-                  className="w-12 h-12 rounded-xl neon-glow hover:neon-glow-lg transition-all duration-300"
+                  className="w-12 h-12 rounded-xl neon-glow hover:neon-glow-lg transition-all duration-300 object-contain"
                 />
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
@@ -297,8 +297,60 @@ export default function Home() {
         </motion.div>
       )}
 
+      {/* Animated Brand Text */}
+      <div className="pt-16 pb-8 text-center relative overflow-hidden">
+        <div className="absolute inset-0 gradient-bg dark:dark-gradient-bg opacity-5"></div>
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative z-10"
+        >
+          <motion.h1 
+            className="text-6xl md:text-8xl font-bold text-primary neon-text tracking-wider"
+            animate={{ 
+              textShadow: [
+                "0 0 10px hsl(var(--neon-blue) / 0.8)",
+                "0 0 20px hsl(var(--neon-blue) / 1), 0 0 30px hsl(var(--neon-cyan) / 0.8)",
+                "0 0 10px hsl(var(--neon-blue) / 0.8)"
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            {"Zhecker".split("").map((letter, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
+                className="inline-block"
+                whileHover={{ 
+                  scale: 1.2, 
+                  color: "hsl(var(--neon-cyan))",
+                  textShadow: "0 0 25px hsl(var(--neon-cyan) / 1)"
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </motion.h1>
+          <motion.p 
+            className="text-lg text-muted-foreground mt-4 font-medium tracking-wide"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+          >
+            AI-Powered Subjective Answer Evaluation
+          </motion.p>
+        </motion.div>
+      </div>
+
       {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-screen flex items-center relative overflow-hidden">
+      <section id="home" className="min-h-screen flex items-center relative overflow-hidden">
         <div className="absolute inset-0 gradient-bg dark:dark-gradient-bg opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -709,7 +761,7 @@ export default function Home() {
                 <img 
                   src={ZheckerLogo} 
                   alt="Zhecker" 
-                  className="w-10 h-10 rounded-lg neon-glow"
+                  className="w-10 h-10 rounded-lg neon-glow object-contain"
                 />
                 <h3 className="text-2xl font-bold text-primary neon-text">Zhecker</h3>
               </div>
