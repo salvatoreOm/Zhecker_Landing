@@ -1,0 +1,23 @@
+Connected!
+2025-08-04T16:57:01  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/home/LogFiles/__lastCheckTime.txt  (https://zheckerz-gsh6h3deamawckh8.scm.centralindia-01.azurewebsites.net/api/vfs/LogFiles/__lastCheckTime.txt)08/04/2025 16:52:22/home/LogFiles/kudu/trace/0b636dcb92c8-3ae6469f-6d05-49dc-819f-5624ff1dc2b9.txt  (https://zheckerz-gsh6h3deamawckh8.scm.centralindia-01.azurewebsites.net/api/vfs/LogFiles/kudu/trace/0b636dcb92c8-3ae6469f-6d05-49dc-819f-5624ff1dc2b9.txt)
+2025-08-04T16:49:44  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 829,1,17, ScmType: GitHubAction/home/LogFiles/kudu/trace/799e17faf4bc-b8d80b51-6162-4a13-a25c-cee0b38bde55.txt  (https://zheckerz-gsh6h3deamawckh8.scm.centralindia-01.azurewebsites.net/api/vfs/LogFiles/kudu/trace/799e17faf4bc-b8d80b51-6162-4a13-a25c-cee0b38bde55.txt)
+2025-08-04T16:44:04  Startup Request, url: /api/settings, method: GET, type: request, pid: 820,1,7, ScmType: GitHubAction/home/LogFiles/kudu/trace/b83c1d20f105-e6b96745-d49e-47cf-9288-39eaa0c3ff8a.txt  (https://zheckerz-gsh6h3deamawckh8.scm.centralindia-01.azurewebsites.net/api/vfs/LogFiles/kudu/trace/b83c1d20f105-e6b96745-d49e-47cf-9288-39eaa0c3ff8a.txt)
+2025-08-04T16:53:17  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 823,1,15, ScmType: GitHubAction/home/LogFiles/2025_08_04_lw1sdlwk000BKU_default_docker.log  (https://zheckerz-gsh6h3deamawckh8.scm.centralindia-01.azurewebsites.net/api/vfs/LogFiles/2025_08_04_lw1sdlwk000BKU_default_docker.log)
+2025-08-04T16:53:13.241759344Z     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+2025-08-04T16:53:13.241761982Z     at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-08-04T16:53:13.241764555Z     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2025-08-04T16:53:13.241767219Z     at node:internal/main/run_main_module:36:49 {
+2025-08-04T16:53:13.241769794Z   code: 'MODULE_NOT_FOUND',
+2025-08-04T16:53:13.241777586Z   requireStack: []
+2025-08-04T16:53:13.241780204Z }
+2025-08-04T16:53:13.243873834Z
+2025-08-04T16:53:13.243888528Z Node.js v22.17.0/home/LogFiles/2025_08_04_lw1sdlwk000BKU_docker.log  (https://zheckerz-gsh6h3deamawckh8.scm.centralindia-01.azurewebsites.net/api/vfs/LogFiles/2025_08_04_lw1sdlwk000BKU_docker.log)
+2025-08-04T16:52:02.765Z INFO  - docker run -d --expose=8080 --name zheckerz_0_cf5c34d7 -e WEBSITE_USE_DIAGNOSTIC_SERVER=true -e WEBSITE_SITE_NAME=Zheckerz -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=zheckerz-gsh6h3deamawckh8.centralindia-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=e12ea0c2836e2408b811dafd92bc770b9de80ad9fb3aff7cb2787a7cd5a57d0c -e NODE_OPTIONS=--require /agents/nodejs/build/src/Loader.js appsvc/node:22-lts_20250724.2.tuxprod REDACTED
+2025-08-04T16:52:02.766Z INFO  - Logging is not enabled for this container.Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-08-04T16:52:10.489Z INFO  - Initiating warmup request to container zheckerz_0_cf5c34d7 for site zheckerz
+2025-08-04T16:52:35.246Z INFO  - Waiting for response to warmup request for container zheckerz_0_cf5c34d7. Elapsed time = 24.7568006 sec
+2025-08-04T16:52:54.570Z INFO  - Waiting for response to warmup request for container zheckerz_0_cf5c34d7. Elapsed time = 44.0810574 sec
+2025-08-04T16:53:13.020Z INFO  - Waiting for response to warmup request for container zheckerz_0_cf5c34d7. Elapsed time = 62.530401 sec
+2025-08-04T16:53:14.379Z ERROR - Container zheckerz_0_cf5c34d7 for site zheckerz has exited, failing site start
+2025-08-04T16:53:14.440Z ERROR - Container zheckerz_0_cf5c34d7 didn't respond to HTTP pings on port: 8080. Failing site start. See container logs for debugging.
+2025-08-04T16:53:14.662Z INFO  - Stopping site zheckerz because it failed during startup.Ending Log Tail of existing logs ---Starting Live Log Stream ---

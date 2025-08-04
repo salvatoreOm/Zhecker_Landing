@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 // Set the correct port from Azure environment
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 process.env.PORT = port;
 
 console.log('🚀 Starting Zhecker Landing Page on Azure...');
