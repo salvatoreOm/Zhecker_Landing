@@ -1,6 +1,10 @@
-// Azure Web App entry point - CommonJS version for compatibility
-const { resolve } = require('path');
-const { existsSync } = require('fs');
+// Azure Web App entry point - ES module version
+import { resolve, dirname } from 'path';
+import { existsSync, readdirSync } from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Set NODE_ENV for Azure
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
@@ -27,10 +31,9 @@ if (!existsSync(appPath)) {
   console.error('❌ Application file not found. Build may have failed.');
   console.error('📁 Directory contents:');
   try {
-    const fs = require('fs');
-    console.log('Root:', fs.readdirSync(__dirname));
+    console.log('Root:', readdirSync(__dirname));
     if (existsSync(distPath)) {
-      console.log('Dist:', fs.readdirSync(distPath));
+      console.log('Dist:', readdirSync(distPath));
     }
   } catch (e) {
     console.error('Could not read directory:', e.message);
@@ -38,13 +41,12 @@ if (!existsSync(appPath)) {
   process.exit(1);
 }
 
-// Import and start the main application using dynamic import
-import(appPath)
-  .then(() => {
-    console.log('✅ Zhecker Landing Page started successfully on Azure!');
-  })
-  .catch((error) => {
-    console.error('❌ Failed to start application:', error);
-    console.error('Stack trace:', error.stack);
-    process.exit(1);
-  });
+// Import and start the main application
+try {
+  await import(appPath);
+  console.log('✅ Zhecker Landing Page started successfully on Azure!');
+} catch (error) {
+  console.error('❌ Failed to start application:', error);
+  console.error('Stack trace:', error.stack);
+  process.exit(1);
+}
