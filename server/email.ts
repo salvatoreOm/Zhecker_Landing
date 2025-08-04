@@ -17,7 +17,7 @@ const EMAIL_CONFIG = {
 const NOTIFICATION_EMAIL = 'yuvrajsinghchauhan@Zhecker.com';
 
 // Create transporter
-const transporter = nodemailer.createTransporter(EMAIL_CONFIG);
+const transporter = nodemailer.createTransport(EMAIL_CONFIG);
 
 export interface EmailService {
   sendSubscriptionNotification(subscription: InsertSubscription): Promise<void>;
