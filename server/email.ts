@@ -8,8 +8,8 @@ const EMAIL_CONFIG = {
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: process.env.EMAIL_USER || 'your-email@gmail.com', // sender email
-    pass: process.env.EMAIL_PASSWORD || 'your-app-password' // app password (not regular password)
+    user: process.env.EMAIL_USER || 'yuvrajsinghchauha@Zhecker.com', // sender email
+    pass: process.env.EMAIL_PASSWORD || 'LetsBuildZhecker123#' // app password
   }
 };
 

@@ -6,6 +6,16 @@ import { insertSubscriptionSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint for Azure App Service
+  app.get("/health", (req, res) => {
+    res.json({ 
+      status: "healthy", 
+      timestamp: new Date().toISOString(),
+      version: "1.0.0",
+      environment: process.env.NODE_ENV || 'development'
+    });
+  });
+
   // Create subscription endpoint
   app.post("/api/subscriptions", async (req, res) => {
     try {

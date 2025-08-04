@@ -11,8 +11,8 @@ When someone subscribes via the landing page, an email notification will be sent
 Create a `.env` file in the project root with the following variables:
 
 ```env
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=your-16-digit-app-password
+EMAIL_USER=yuvrajsinghchauha@Zhecker.com
+EMAIL_PASSWORD=LetsBuildZhecker123#
 ```
 
 ## Gmail Setup (Recommended)
@@ -25,8 +25,8 @@ EMAIL_PASSWORD=your-16-digit-app-password
    - Use this 16-digit password (not your regular Gmail password)
 3. **Update environment variables**:
    ```env
-   EMAIL_USER=your-gmail@gmail.com
-   EMAIL_PASSWORD=abcd-efgh-ijkl-mnop
+   EMAIL_USER=yuvrajsinghchauha@Zhecker.com
+   EMAIL_PASSWORD=LetsBuildZhecker123#
    ```
 
 ## Other Email Providers
