@@ -180,80 +180,74 @@
   }
 
   .brick-letter.break {
-    animation: bounceDisappear 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    position: fixed !important;
+    z-index: 9999;
+    top: var(--initial-top, 0);
+    left: var(--initial-left, 0);
+    animation: scatterExplode 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   .brick-letter.form {
     animation: bounceReconnect 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   }
 
-  @keyframes bounceDisappear {
+  @keyframes scatterExplode {
     0% {
       transform: translateY(0) translateX(0) scale(1) rotate(0deg);
       opacity: 1;
       filter: blur(0px);
     }
-    15% {
-      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.2) rotate(45deg);
-      opacity: 0.95;
+    20% {
+      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.8) rotate(45deg);
+      opacity: 0.7;
       filter: blur(0px);
     }
-    30% {
-      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(1.0) rotate(90deg);
-      opacity: 0.85;
+    40% {
+      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(2.2) rotate(90deg);
+      opacity: 0.5;
       filter: blur(1px);
     }
-    50% {
-      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(0.8) rotate(180deg);
-      opacity: 0.7;
+    60% {
+      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(2.8) rotate(180deg);
+      opacity: 0.3;
       filter: blur(2px);
     }
-    70% {
-      transform: translateY(var(--bounce-y-4)) translateX(var(--bounce-x-4)) scale(0.6) rotate(270deg);
-      opacity: 0.5;
-      filter: blur(3px);
-    }
-    85% {
-      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.4) rotate(315deg);
-      opacity: 0.3;
+    80% {
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(3.5) rotate(360deg);
+      opacity: 0.15;
       filter: blur(4px);
     }
     100% {
-      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.2) rotate(360deg);
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(4.2) rotate(720deg);
       opacity: 0;
-      filter: blur(5px);
+      filter: blur(8px);
     }
   }
 
   @keyframes bounceReconnect {
     0% {
-      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.2) rotate(360deg);
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(4.2) rotate(720deg);
       opacity: 0;
-      filter: blur(5px);
+      filter: blur(8px);
     }
-    15% {
-      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(0.4) rotate(315deg);
-      opacity: 0.3;
+    20% {
+      transform: translateY(var(--bounce-y-final)) translateX(var(--bounce-x-final)) scale(3.5) rotate(360deg);
+      opacity: 0.15;
       filter: blur(4px);
     }
-    30% {
-      transform: translateY(var(--bounce-y-4)) translateX(var(--bounce-x-4)) scale(0.6) rotate(270deg);
-      opacity: 0.5;
-      filter: blur(3px);
-    }
-    50% {
-      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(0.8) rotate(180deg);
-      opacity: 0.7;
+    40% {
+      transform: translateY(var(--bounce-y-3)) translateX(var(--bounce-x-3)) scale(2.8) rotate(180deg);
+      opacity: 0.3;
       filter: blur(2px);
     }
-    70% {
-      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(1.0) rotate(90deg);
-      opacity: 0.85;
+    60% {
+      transform: translateY(var(--bounce-y-2)) translateX(var(--bounce-x-2)) scale(2.2) rotate(90deg);
+      opacity: 0.5;
       filter: blur(1px);
     }
-    85% {
-      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.2) rotate(45deg);
-      opacity: 0.95;
+    80% {
+      transform: translateY(var(--bounce-y-1)) translateX(var(--bounce-x-1)) scale(1.8) rotate(45deg);
+      opacity: 0.7;
       filter: blur(0px);
     }
     100% {
@@ -285,15 +279,33 @@
 
   /* Feature Icon Glow Improvements */
   .feature-icon-glow {
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--neon-cyan)));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-icon-glow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    transform: rotate(-45deg) translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .feature-icon-glow:hover::before {
+    transform: rotate(-45deg) translateX(100%);
   }
 
   .feature-icon-glow:hover {
     box-shadow: 0 0 30px hsl(var(--primary) / 0.8),
                 0 0 60px hsl(var(--neon-blue) / 0.6),
                 0 0 90px hsl(var(--neon-cyan) / 0.4);
-    transform: scale(1.05) rotateY(5deg);
+    transform: scale(1.1) rotateY(10deg) rotateX(5deg);
   }
 
   .dark .feature-icon-glow:hover {
@@ -319,6 +331,81 @@
   }
 
 
+
+  /* Enhanced Feature Card Hover Effects */
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: linear-gradient(135deg, 
+      hsl(var(--background)) 0%, 
+      hsl(var(--muted) / 0.3) 100%);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      hsl(var(--primary) / 0.3) 30%,
+      hsl(var(--neon-cyan) / 0.4) 50%, 
+      hsl(var(--primary) / 0.3) 70%,
+      transparent 100%);
+    transition: left 0.6s ease;
+    z-index: 1;
+  }
+
+  .feature-card:hover::before {
+    left: 100%;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.15) 0%, 
+      hsl(var(--neon-cyan) / 0.2) 30%,
+      hsl(var(--primary) / 0.25) 70%,
+      hsl(var(--neon-blue) / 0.15) 100%);
+    border-color: hsl(var(--primary) / 0.6);
+    box-shadow: 
+      0 20px 40px hsl(var(--primary) / 0.25),
+      0 0 0 1px hsl(var(--primary) / 0.3),
+      inset 0 1px 0 hsl(var(--primary) / 0.2);
+  }
+
+  .feature-card:hover .feature-content {
+    animation: subtle-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes subtle-pulse {
+    0%, 100% { 
+      opacity: 1; 
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.95; 
+      transform: scale(1.01);
+    }
+  }
+
+  .dark .feature-card:hover {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.2) 0%, 
+      hsl(var(--neon-cyan) / 0.3) 25%,
+      hsl(var(--neon-blue) / 0.25) 50%,
+      hsl(var(--primary) / 0.35) 75%,
+      hsl(var(--background)) 100%);
+    box-shadow: 
+      0 20px 40px hsl(var(--primary) / 0.4),
+      0 0 30px hsl(var(--neon-blue) / 0.3),
+      0 0 0 1px hsl(var(--primary) / 0.5),
+      inset 0 1px 0 hsl(var(--primary) / 0.3);
+  }
 
   /* Hover Effects */
   .hover-lift {

@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { emailService } from "./email";
 import { insertSubscriptionSchema } from "@shared/schema";
 import { z } from "zod";
 
@@ -10,6 +11,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertSubscriptionSchema.parse(req.body);
       const subscription = await storage.createSubscription(validatedData);
+      
+      // Send email notification
+      try {
+        await emailService.sendSubscriptionNotification(validatedData);
+        console.log(`📧 Email notification sent for subscription: ${subscription.id}`);
+      } catch (emailError) {
+        console.error('⚠️ Email notification failed, but subscription was saved:', emailError);
+        // Don't fail the entire request if email fails
+      }
+      
       res.json({ success: true, subscription });
     } catch (error) {
       if (error instanceof z.ZodError) {

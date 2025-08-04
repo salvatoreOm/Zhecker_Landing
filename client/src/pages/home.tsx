@@ -36,6 +36,8 @@ import { useBrickAnimation } from "@/hooks/use-brick-animation";
 import { apiRequest } from "@/lib/queryClient";
 import { insertSubscriptionSchema, type InsertSubscription } from "@shared/schema";
 import ZheckerLogo from "@assets/image_1754239227889.png";
+import ZheckerDashboard from "../../../This_Image1.png";
+import ClassroomImage from "../../../Image_2.png";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -70,7 +72,7 @@ export default function Home() {
   const benefitsAnimation = useScrollAnimation(0.1);
   const subscribeAnimation = useScrollAnimation(0.1);
   const { ref: featureCardsRef, visibleItems: featureCardsVisible } = useStaggeredAnimation(6, 0.1);
-  const { ref: brickAnimationRef, animationState, scatterPositions } = useBrickAnimation(7, 0.2);
+  const { ref: brickAnimationRef, animationState, scatterPositions, initialPositions } = useBrickAnimation(7, 0.2);
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
@@ -324,6 +326,8 @@ export default function Home() {
                 style={{ 
                   transitionDelay: `${index * 0.1}s`,
                   animationDelay: `${index * 0.1}s`,
+                  '--initial-top': `${initialPositions[index]?.top || 0}px`,
+                  '--initial-left': `${initialPositions[index]?.left || 0}px`,
                   '--bounce-x-1': `${(scatterPositions[index]?.x || 0) * 0.2}px`,
                   '--bounce-y-1': `${(scatterPositions[index]?.y || 0) * 0.2}px`,
                   '--bounce-x-2': `${(scatterPositions[index]?.x || 0) * 0.4}px`,
@@ -376,6 +380,7 @@ export default function Home() {
                   variant="outline" 
                   size="lg"
                   className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold neon-border transition-all duration-300 hover-lift"
+                  onClick={() => window.open("https://youtu.be/k32bpghJuGA?si=J2MkO_g0mgRAyerV", "_blank")}
                 >
                   Watch Demo
                 </Button>
@@ -394,8 +399,8 @@ export default function Home() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                  alt="Modern classroom with digital assessment tools" 
+                  src={ZheckerDashboard} 
+                  alt="Zhecker Dashboard - AI-Powered Grading Interface" 
                   className="rounded-2xl shadow-2xl w-full h-auto dark:neon-glow" 
                 />
               </motion.div>
@@ -444,7 +449,7 @@ export default function Home() {
               {
                 icon: CheckCircle2,
                 title: "AI-Powered Analysis",
-                description: "Advanced machine learning algorithms analyze subjective answers with human-level accuracy and consistency."
+                description: "Intelligent analysis system that evaluates subjective answers with high accuracy and consistency for fair grading."
               },
               {
                 icon: Users,
@@ -458,13 +463,13 @@ export default function Home() {
               },
               {
                 icon: Zap,
-                title: "Seamless Integration",
-                description: "Easily integrate with existing LMS platforms and educational tools your institution already uses."
+                title: "Student Portal",
+                description: "Dedicated student portal where grading reports and evaluation results are published and accessible after assessment completion."
               },
               {
                 icon: Shield,
-                title: "Secure & Compliant",
-                description: "Enterprise-grade security with FERPA compliance ensuring student data protection and privacy."
+                title: "End-to-End Solution",
+                description: "Complete pipeline from grading and analysis to publishing results, streamlining the entire evaluation process in one integrated system."
               },
               {
                 icon: BookOpen,
@@ -481,14 +486,14 @@ export default function Home() {
                   whileHover={{ y: -8 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Card className="bg-card hover:shadow-2xl transition-all duration-300 neon-border h-full hover-lift">
+                  <Card className="feature-card bg-card hover:shadow-2xl transition-all duration-300 neon-border h-full hover-lift">
                     <CardHeader>
                       <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 feature-icon-glow">
                         <feature.icon className="w-8 h-8 text-white" />
                       </div>
                       <CardTitle className="text-2xl font-bold">{feature.title}</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="feature-content">
                       <p className="text-muted-foreground">{feature.description}</p>
                     </CardContent>
                   </Card>
@@ -510,8 +515,8 @@ export default function Home() {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                  alt="Educational technology and AI evaluation interface" 
+                  src={ClassroomImage} 
+                  alt="Classroom with students taking an examination" 
                   className="rounded-2xl shadow-2xl w-full h-auto dark:neon-glow" 
                 />
               </motion.div>
@@ -698,7 +703,7 @@ export default function Home() {
                           <FormControl>
                             <Input 
                               type="tel" 
-                              placeholder="+1 (555) 123-4567" 
+                              placeholder="+91 9109140808" 
                               {...field}
                               className="focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
                             />
@@ -798,10 +803,10 @@ export default function Home() {
             <div>
               <h4 className="font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li>support@zhecker.com</li>
-                <li>+1 (555) 123-4567</li>
-                <li>123 Education Ave</li>
-                <li>Innovation City, IC 12345</li>
+                <li>info@zhecker.com</li>
+                <li>+91 9109140808</li>
+                <li>45-A, Alaknanda Tower, City Center</li>
+                <li>Gird Madhya Pradesh, 474011, India</li>
               </ul>
             </div>
           </div>
