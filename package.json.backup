@@ -1,8 +1,0 @@
-# Backup of package.json engines section
-# The original engines specification should be:
-{
-  "engines": {
-    "node": "20.x",
-    "npm": ">=10.0.0"
-  }
-}

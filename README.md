@@ -1,6 +1,6 @@
-# Zhecker - AI-Powered Subjective Answer Evaluation
+# Zhecker - AI-Powered Subjective Handwritten Answer Evaluation
 
-A beautiful, modern landing page for Zhecker, an AI-powered educational software that evaluates subjective answers for educational institutions. Features dual theme support with a clean light theme and stunning blue/black neon dark theme, along with advanced scroll animations and interactive letter effects.
+A beautiful, modern landing page for Zhecker, an AI-powered educational software that evaluates subjective handwritten answers for educational institutions. Features dual theme support with a clean light theme and stunning blue/black neon dark theme, along with advanced scroll animations and interactive letter effects.
 
 ![Zhecker Landing Page](https://img.shields.io/badge/Status-Live-brightgreen)
 ![React](https://img.shields.io/badge/React-18.0.0-blue)

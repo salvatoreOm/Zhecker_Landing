@@ -264,20 +264,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-background/50 rounded-2xl">
-                  <span className="text-sm">Per Answer Sheet</span>
-                  <span className="font-bold text-primary">₹2.50</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-background/50 rounded-2xl">
-                  <span className="text-sm">Bulk Evaluation (500+)</span>
-                  <span className="font-bold text-primary">₹1.80</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-background/50 rounded-2xl">
-                  <span className="text-sm">Enterprise (5000+)</span>
-                  <span className="font-bold text-primary">₹1.20</span>
-                </div>
-              </div>
+
 
               <div className="space-y-3 pt-4">
                 <Button 
@@ -345,7 +332,7 @@ export default function Home() {
             ))}
           </h1>
           <p className="text-lg text-muted-foreground mt-4 font-medium tracking-wide">
-            AI-Powered Subjective Answer Evaluation
+            AI-Powered Subjective Handwritten Answer Evaluation
           </p>
         </div>
       </div>
@@ -570,8 +557,8 @@ export default function Home() {
             {[
               { value: "98%", label: "Accuracy Rate", icon: Target },
               { value: "75%", label: "Time Saved", icon: Clock },
-              { value: "500+", label: "Institutions", icon: Users },
-              { value: "1M+", label: "Evaluations", icon: TrendingUp }
+              { value: "3+", label: "Institutions", icon: Users },
+              { value: "1000+", label: "Evaluations", icon: TrendingUp }
             ].map((stat, index) => (
               <AnimatedSection key={index} className="text-center">
                 <motion.div
@@ -776,7 +763,7 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-primary neon-text">Zhecker</h3>
               </div>
               <p className="text-muted-foreground mb-4">
-                Revolutionizing educational assessment with AI-powered subjective answer evaluation.
+                Revolutionizing educational assessment with AI-powered subjective handwritten answer evaluation.
               </p>
             </div>
             
@@ -812,7 +799,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-border pt-8 mt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 Zhecker. All rights reserved.</p>
+            <p>&copy; 2025 Zhecker. All rights reserved.</p>
           </div>
         </div>
       </footer>
