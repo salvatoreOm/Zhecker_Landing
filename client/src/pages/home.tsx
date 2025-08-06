@@ -555,7 +555,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { value: "98%", label: "Accuracy Rate", icon: Target },
+              { value: "95%", label: "Accuracy Rate", icon: Target },
               { value: "75%", label: "Time Saved", icon: Clock },
               { value: "3+", label: "Institutions", icon: Users },
               { value: "1000+", label: "Evaluations", icon: TrendingUp }
