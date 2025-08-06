@@ -403,7 +403,7 @@ export default function Home() {
                     <CheckCircle2 className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold">98% Accuracy</p>
+                    <p className="font-semibold">95% Accuracy</p>
                     <p className="text-sm text-muted-foreground">AI Evaluation</p>
                   </div>
                 </div>
